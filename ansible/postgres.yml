@@ -1,0 +1,18 @@
+- name: Load vars from a file
+  include_vars:
+    dir: vars
+    extensions: [yml]
+- name: run postgresql docker container
+  docker_container:
+    hostname: "{{ postgres_hostname }}"
+    name: postgres
+    image: postgres:{{ postgres_version }}
+    purge_networks: yes
+    networks:
+      - name: "{{ docker_network_name }}"
+    ports:
+      - "{{ postgres_port }}:5432"
+    env:
+      POSTGRES_DB: "{{ POSTGRES_DB }}"
+      POSTGRES_USER: "{{ POSTGRES_USER }}"
+      POSTGRES_PASSWORD: "{{ POSTGRES_PASSWORD }}"

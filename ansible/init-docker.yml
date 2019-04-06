@@ -1,0 +1,11 @@
+- name: Load vars from a file
+  include_vars:
+    dir: vars
+    extensions: [yml]
+- name: Create a network with options
+  docker_network:
+    name: "{{ docker_network_name }}"
+    ipam_options:
+      subnet: '10.10.101.0/24'
+      
+

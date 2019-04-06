@@ -1,0 +1,17 @@
+- name: Load vars from a file
+  include_vars:
+    dir: vars
+    extensions: [yml]
+- name: run hasura graphql engine
+  docker_container:
+    name: hasura
+    image: "hasura/graphql-engine:{{ hasura_graphql_engine_version }}"
+    purge_networks: yes
+    networks:
+      - name: "{{ docker_network_name }}"
+    ports:
+      - "8080:8080"
+    env:
+      HASURA_GRAPHQL_DATABASE_URL: "postgres://{{ POSTGRES_USER }}:{{ POSTGRES_PASSWORD }}@{{ postgres_hostname }}:5432/{{ POSTGRES_DB }}"
+      HASURA_GRAPHQL_ENABLE_CONSOLE: "{{ HASURA_GRAPHQL_ENABLE_CONSOLE }}"
+      HASURA_GRAPHQL_ENABLE_TELEMETRY: "{{ HASURA_GRAPHQL_ENABLE_TELEMETRY }}"

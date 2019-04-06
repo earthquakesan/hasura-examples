@@ -1,0 +1,10 @@
+---
+- hosts: all
+  tasks:
+  - import_tasks: init-docker.yml
+  - import_tasks: postgres.yml
+  - name: wait until postgres is up and running (initial delay of 5 seconds)
+    wait_for:
+      port: "{{ postgres_port }}"
+      delay: 5
+  - import_tasks: hasura.yml

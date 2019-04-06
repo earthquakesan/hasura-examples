@@ -1,0 +1,4 @@
+---
+hasura_graphql_engine_version: v1.0.0-alpha41
+HASURA_GRAPHQL_ENABLE_CONSOLE: "true"
+HASURA_GRAPHQL_ENABLE_TELEMETRY: "false"
